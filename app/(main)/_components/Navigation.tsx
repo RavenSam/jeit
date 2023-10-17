@@ -4,6 +4,7 @@ import { ChevronsLeft, Menu } from "lucide-react"
 import { usePathname } from "next/navigation"
 import React, { ElementRef, useEffect, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
+import UserItem from "./UserItem"
 
 export default function Navigation() {
   const pathname = usePathname()
@@ -100,7 +101,7 @@ export default function Navigation() {
         )}
       >
         <div className="">
-          <p>Action items</p>
+          <UserItem/>
         </div>
         <div className="mt-4">
           <p>Documents</p>
