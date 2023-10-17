@@ -11,13 +11,13 @@ export default function DocumentsPage() {
   const { user } = useUser()
   const create = useMutation(api.documents.create)
 
-  const onCreate = () => {
+  const onCreate = () =>{
     const promise = create({ title: "Untitled" })
 
     toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Oops! Failed to created a the note. Try again.",
+      loading:"Creating a new note...",
+      success:"New note created!",
+      error:"Oops! Failed to created a the note. Try again."
     })
   }
 

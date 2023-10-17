@@ -1,14 +1,22 @@
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { ChevronsLeft, Menu } from "lucide-react"
+import { ChevronsLeft, Menu, Plus, Search, Settings } from "lucide-react"
 import { usePathname } from "next/navigation"
 import React, { ElementRef, useEffect, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import UserItem from "./UserItem"
+import Item from "./Item"
+import { useMutation, useQuery } from "convex/react"
+import { api } from "@/convex/_generated/api"
+import { toast } from "sonner"
 
 export default function Navigation() {
   const pathname = usePathname()
   const isMobile = useMediaQuery("(max-width: 768px)")
+
+  const create = useMutation(api.documents.create)
+  const docs = useQuery(api.documents.get)
+
 
   const isResizingRef = useRef(false)
   const sidebarRef = useRef<ElementRef<"aside">>(null)
@@ -22,7 +30,7 @@ export default function Navigation() {
     } else {
       resetWidth()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile])
 
   useEffect(() => {
@@ -90,6 +98,17 @@ export default function Navigation() {
     }
   }
 
+
+  const onCreate = () => {
+    const promise = create({ title: "Untitled" })
+
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Oops! Failed to created a the note. Try again.",
+    })
+  }
+
   return (
     <>
       <aside
@@ -101,10 +120,18 @@ export default function Navigation() {
         )}
       >
         <div className="">
-          <UserItem/>
+          <UserItem />
+
+          <Item onClick={()=>{}} label="Search" icon={Search} isSearch/>
+          <Item onClick={()=>{}} label="Settings" icon={Settings}/>
+
+          <Item onClick={onCreate} label="New page" icon={Plus} />
         </div>
-        <div className="mt-4">
-          <p>Documents</p>
+
+        <div className="">
+          {docs?.map(note =>(
+            <div key={note._id} className="">{note.title}</div>
+          ))}
         </div>
 
         <Button
