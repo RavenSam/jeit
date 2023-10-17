@@ -3,12 +3,10 @@ import Navbar from "./_components/Navbar"
 
 export default function HomeLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className="h-full">
-        <Navbar />
+    <div className="h-full">
+      <Navbar />
 
-        <main className="h-full">{children}</main>
-      </body>
-    </html>
+      <main className="h-full">{children}</main>
+    </div>
   )
 }
