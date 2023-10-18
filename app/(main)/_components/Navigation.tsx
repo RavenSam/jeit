@@ -6,17 +6,16 @@ import React, { ElementRef, useEffect, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import UserItem from "./UserItem"
 import Item from "./Item"
-import { useMutation, useQuery } from "convex/react"
+import { useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { toast } from "sonner"
+import DocumentList from "./DocumentList"
 
 export default function Navigation() {
   const pathname = usePathname()
   const isMobile = useMediaQuery("(max-width: 768px)")
 
   const create = useMutation(api.documents.create)
-  const docs = useQuery(api.documents.get)
-
 
   const isResizingRef = useRef(false)
   const sidebarRef = useRef<ElementRef<"aside">>(null)
@@ -98,7 +97,6 @@ export default function Navigation() {
     }
   }
 
-
   const onCreate = () => {
     const promise = create({ title: "Untitled" })
 
@@ -119,19 +117,18 @@ export default function Navigation() {
           isMobile && "w-0"
         )}
       >
-        <div className="">
-          <UserItem />
+        <UserItem />
 
-          <Item onClick={()=>{}} label="Search" icon={Search} isSearch/>
-          <Item onClick={()=>{}} label="Settings" icon={Settings}/>
+        <div className="pr-2 pl-1">
+          <Item onClick={() => {}} label="Search" icon={Search} isSearch />
+
+          <Item onClick={() => {}} label="Settings" icon={Settings} />
 
           <Item onClick={onCreate} label="New page" icon={Plus} />
-        </div>
 
-        <div className="">
-          {docs?.map(note =>(
-            <div key={note._id} className="">{note.title}</div>
-          ))}
+          <div className="mt-4">
+            <DocumentList />
+          </div>
         </div>
 
         <Button
