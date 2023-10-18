@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils"
 import { useMutation } from "convex/react"
 import {
   ChevronRight,
-  Dot,
   LucideIcon,
   MoreHorizontal,
   Plus,
@@ -31,7 +30,7 @@ interface ItemProps {
   isSearch?: boolean
   level?: number
   onExpand?: () => void
-  onClick: () => void
+  onClick?: () => void
   label: string
   icon: LucideIcon
 }
