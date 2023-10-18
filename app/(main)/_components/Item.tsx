@@ -3,9 +3,25 @@ import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
 import { cn } from "@/lib/utils"
 import { useMutation } from "convex/react"
-import { ChevronRight, LucideIcon, Plus, Router } from "lucide-react"
+import {
+  ChevronRight,
+  Dot,
+  LucideIcon,
+  MoreHorizontal,
+  Plus,
+  Trash,
+} from "lucide-react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useUser } from "@clerk/clerk-react"
 
 interface ItemProps {
   id?: Id<"documents">
@@ -32,8 +48,10 @@ export default function Item({
   level = 0,
   onExpand,
 }: ItemProps) {
+  const {user} = useUser()
   const router = useRouter()
   const create = useMutation(api.documents.create)
+  const archive = useMutation(api.documents.archive)
 
   const handleExpand = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
@@ -62,6 +80,20 @@ export default function Item({
     })
   }
 
+  const onArchive = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation()
+
+    if (!id) return
+
+    const promise = archive({ id })
+
+    toast.promise(promise, {
+      loading: "Moving to trash...",
+      success: "Note archived",
+      error: "Oops! Failed to archive note. Try again.",
+    })
+
+  }
   return (
     <div
       role="button"
@@ -104,7 +136,35 @@ export default function Item({
       )}
 
       {!!id && (
-        <div className="ml-auto flex items-center gap-x-2">
+        <div className="ml-auto flex items-center">
+          <DropdownMenu>
+            <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
+              <div
+                role="button"
+                className="h-full p-1 rounded-sm text-foreground/50 hover:text-foreground opacity-0 group-hover:opacity-100"
+              >
+                <MoreHorizontal className="h-4 w-4 shrink-0" />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-60"
+              align="start"
+              side="right"
+              forceMount
+            >
+              <DropdownMenuItem onClick={onArchive} className="cursor-pointer text-muted-foreground">
+                <Trash className="h-4 w-4 mr-2" />
+                Delete
+              </DropdownMenuItem>
+              
+              <DropdownMenuSeparator/>
+
+              <DropdownMenuLabel onClick={(e) => e.stopPropagation()} className="text-muted-foreground text-xs">
+                Last edited by {user?.username}
+              </DropdownMenuLabel>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <div
             role="button"
             onClick={onCreate}
