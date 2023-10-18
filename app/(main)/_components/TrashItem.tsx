@@ -4,7 +4,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import Item from "./Item"
-import { Search, Trash, Undo, Undo2 } from "lucide-react"
+import { Search, Trash, Undo2 } from "lucide-react"
 import { useRouter, useParams } from "next/navigation"
 import { useMutation, useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"

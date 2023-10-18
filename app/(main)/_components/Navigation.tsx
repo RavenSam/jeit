@@ -18,11 +18,14 @@ import { api } from "@/convex/_generated/api"
 import { toast } from "sonner"
 import DocumentList from "./DocumentList"
 import TrashItem from "./TrashItem"
+import { useSearch } from "@/store/use-search"
 
 
 export default function Navigation() {
   const pathname = usePathname()
   const isMobile = useMediaQuery("(max-width: 768px)")
+  const { onOpen } = useSearch()
+
 
   const create = useMutation(api.documents.create)
 
@@ -129,7 +132,7 @@ export default function Navigation() {
         <UserItem />
 
         <div className="pr-2 pl-1">
-          <Item onClick={() => {}} label="Search" icon={Search} isSearch />
+          <Item onClick={onOpen} label="Search" icon={Search} isSearch />
 
           <Item onClick={() => {}} label="Settings" icon={Settings} />
 
