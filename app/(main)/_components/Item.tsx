@@ -47,7 +47,7 @@ export default function Item({
   level = 0,
   onExpand,
 }: ItemProps) {
-  const {user} = useUser()
+  const { user } = useUser()
   const router = useRouter()
   const create = useMutation(api.documents.create)
   const archive = useMutation(api.documents.archive)
@@ -68,7 +68,7 @@ export default function Item({
           onExpand?.()
         }
 
-        // router.push(`/documents/${documentId}`)
+        router.push(`/documents/${documentId}`)
       }
     )
 
@@ -91,7 +91,6 @@ export default function Item({
       success: "Note archived",
       error: "Oops! Failed to archive note. Try again.",
     })
-
   }
   return (
     <div
@@ -99,8 +98,8 @@ export default function Item({
       onClick={onClick}
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
       className={cn(
-        "group min-h-[27px] text-sm py-1.5 pr-1 w-full rounded-lg hover:bg-primary/5 flex items-center text-muted-foreground font-medium",
-        active && "bg-primary/5 text-primary"
+        "group min-h-[27px] text-sm py-1.5 pr-1 w-full rounded-lg hover:bg-foreground/5 hover:text-foreground flex items-center text-muted-foreground font-medium",
+        active && "bg-foreground/5 text-foreground"
       )}
     >
       {!!id && (
@@ -122,7 +121,12 @@ export default function Item({
         <div className="shrink-0 text-[18px] p-1 mr-2">{documentIcon}</div>
       ) : (
         <div className="p-1">
-          <Icon className="shrink-0 h-[18px] mr-2 text-muted-foreground" />
+          <Icon
+            className={cn(
+              "shrink-0 h-[18px] mr-2 text-muted-foreground group-hover:text-foreground",
+              active && "text-foreground"
+            )}
+          />
         </div>
       )}
 
@@ -151,14 +155,20 @@ export default function Item({
               side="right"
               forceMount
             >
-              <DropdownMenuItem onClick={onArchive} className="cursor-pointer text-muted-foreground">
+              <DropdownMenuItem
+                onClick={onArchive}
+                className="cursor-pointer text-muted-foreground"
+              >
                 <Trash className="h-4 w-4 mr-2" />
                 Delete
               </DropdownMenuItem>
-              
-              <DropdownMenuSeparator/>
 
-              <DropdownMenuLabel onClick={(e) => e.stopPropagation()} className="text-muted-foreground text-xs">
+              <DropdownMenuSeparator />
+
+              <DropdownMenuLabel
+                onClick={(e) => e.stopPropagation()}
+                className="text-muted-foreground text-xs"
+              >
                 Last edited by {user?.username}
               </DropdownMenuLabel>
             </DropdownMenuContent>

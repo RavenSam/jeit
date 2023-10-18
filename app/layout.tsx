@@ -40,14 +40,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-            storageKey="plume-theme"
+            storageKey="jet-theme"
           >
             {children}
 
             <Toaster position="bottom-center" />
 
             <ModalProvider />
-
           </ThemeProvider>
         </ConvexClientProvider>
       </body>

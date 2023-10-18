@@ -18,7 +18,7 @@ export default function UserItem() {
         <DropdownMenuTrigger asChild>
           <Button variant={"ghost"} className="gap-3 px-3">
             <Avatar className="w-6 h-6">
-              <AvatarImage src={user?.imageUrl} />
+              <AvatarImage src={user?.imageUrl} width={24} height={24} />
             </Avatar>
 
             <span className="font-medium line-clamp-1">{user?.username}</span>
@@ -39,7 +39,7 @@ export default function UserItem() {
             <div className="flex items-center gap-x-2">
               <div className="rounded-md bg-secondary p-1">
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src={user?.imageUrl} />
+                  <AvatarImage src={user?.imageUrl} width={32} height={32} />
                 </Avatar>
               </div>
               <div className="space-y-1">

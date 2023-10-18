@@ -8,7 +8,7 @@ import {
   Search,
   Settings,
 } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 import React, { ElementRef, useEffect, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import UserItem from "./UserItem"
@@ -20,9 +20,11 @@ import DocumentList from "./DocumentList"
 import TrashItem from "./TrashItem"
 import { useSearch } from "@/store/use-search"
 import { useSettings } from "@/store/use-settings"
+import Navbar from "./Navbar"
 
 export default function Navigation() {
   const pathname = usePathname()
+  const params = useParams()
   const isMobile = useMediaQuery("(max-width: 768px)")
   const { onOpen: openSearch } = useSearch()
   const { onOpen: openSettings } = useSettings()
@@ -124,7 +126,7 @@ export default function Navigation() {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[9999]",
+          "group/sidebar h-full bg-background overflow-y-auto relative flex w-60 flex-col z-[9999]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
         )}
@@ -175,19 +177,23 @@ export default function Navigation() {
           isMobile && "left-0 w-full"
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full">
-          {isCollapsed && (
-            <Button
-              variant={"link"}
-              size={"icon"}
-              onClick={resetWidth}
-              className="text-muted-foreground hover:text-primary"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">collapse sidenav</span>
-            </Button>
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+        ) : (
+          <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapsed && (
+              <Button
+                variant={"link"}
+                size={"icon"}
+                onClick={resetWidth}
+                className="text-muted-foreground hover:text-primary"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">collapse sidenav</span>
+              </Button>
+            )}
+          </nav>
+        )}
       </div>
     </>
   )
