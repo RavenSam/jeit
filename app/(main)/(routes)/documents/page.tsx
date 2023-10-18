@@ -11,22 +11,22 @@ export default function DocumentsPage() {
   const { user } = useUser()
   const create = useMutation(api.documents.create)
 
-  const onCreate = () =>{
+  const onCreate = () => {
     const promise = create({ title: "Untitled" })
 
     toast.promise(promise, {
-      loading:"Creating a new note...",
-      success:"New note created!",
-      error:"Oops! Failed to created a the note. Try again."
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Oops! Failed to created a the note. Try again.",
     })
   }
 
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-8">
-      <FolderOpenDot className="h-52 w-52 opacity-30" />
+      <FolderOpenDot className="h-52 w-52 opacity-20" />
 
       <h2 className="text-lg font-medium">
-        Howdy {user?.username}, to your Plume docs
+        Howdy {user?.username}, to your Jet docs
       </h2>
 
       <div className="flex flex-col items-center justify-center space-y-4">

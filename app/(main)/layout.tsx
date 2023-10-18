@@ -27,7 +27,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       <Navigation />
 
       <SearchCommand />
-      
+
       <main className="flex-1 h-full overflow-y-auto">{children}</main>
     </div>
   )

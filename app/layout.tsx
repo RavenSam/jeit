@@ -7,11 +7,12 @@ import ConvexClientProvider from "@/components/providers/convex-provider"
 import { Toaster } from "sonner"
 
 import "./globals.css"
+import ModalProvider from "@/components/providers/modal-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Plume",
+  title: "Jet",
   description: "Lightning fast peersonal editor",
   icons: {
     icon: [
@@ -44,6 +45,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
 
             <Toaster position="bottom-center" />
+
+            <ModalProvider />
+
           </ThemeProvider>
         </ConvexClientProvider>
       </body>

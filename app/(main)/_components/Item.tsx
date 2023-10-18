@@ -107,7 +107,7 @@ export default function Item({
         <div
           role="button"
           onClick={handleExpand}
-          className="h-full rounded-sm text-foreground/50 hover:text-foreground p-1 hover:bg-background/20"
+          className="h-full rounded-sm text-foreground/50 hover:text-foreground py-1 px-2"
         >
           <ChevronRight
             className={cn(

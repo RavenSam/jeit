@@ -19,13 +19,13 @@ import { toast } from "sonner"
 import DocumentList from "./DocumentList"
 import TrashItem from "./TrashItem"
 import { useSearch } from "@/store/use-search"
-
+import { useSettings } from "@/store/use-settings"
 
 export default function Navigation() {
   const pathname = usePathname()
   const isMobile = useMediaQuery("(max-width: 768px)")
-  const { onOpen } = useSearch()
-
+  const { onOpen: openSearch } = useSearch()
+  const { onOpen: openSettings } = useSettings()
 
   const create = useMutation(api.documents.create)
 
@@ -132,9 +132,9 @@ export default function Navigation() {
         <UserItem />
 
         <div className="pr-2 pl-1">
-          <Item onClick={onOpen} label="Search" icon={Search} isSearch />
+          <Item onClick={openSearch} label="Search" icon={Search} isSearch />
 
-          <Item onClick={() => {}} label="Settings" icon={Settings} />
+          <Item onClick={openSettings} label="Settings" icon={Settings} />
 
           <Item onClick={onCreate} label="New page" icon={PlusCircle} />
 
@@ -143,7 +143,7 @@ export default function Navigation() {
 
             <Item onClick={onCreate} label="Add a page" icon={Plus} />
 
-            <TrashItem isMobile={isMobile}/>
+            <TrashItem isMobile={isMobile} />
           </div>
         </div>
 

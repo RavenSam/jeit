@@ -28,7 +28,7 @@ export default function Logo() {
           font.className
         )}
       >
-        Plume
+        Jet
       </p>
     </div>
   )

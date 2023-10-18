@@ -20,12 +20,11 @@ export default function Heading() {
 
       <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
         Your Ideas, Documents, & Plans, Unified. <br />
-        Welcome to <span className="italic">Plume.</span>
+        Welcome to <span className="italic">Jet.</span>
       </h1>
 
       <h2 className="text-base sm:text-xl md:text-2xl font-medium text-muted-foreground">
-        Plume is the connected workplace where <br /> better, faster work
-        happens.
+        Jet is the connected workplace where <br /> better, faster work happens.
       </h2>
 
       {isLoading && (
@@ -35,7 +34,7 @@ export default function Heading() {
       )}
 
       {isAuthenticated && !isLoading && (
-        <Button className="font-semibold tracking-widest" asChild>
+        <Button size={"lg"} className="font-semibold tracking-widest" asChild>
           <Link href={"/documents"}>
             Documents
             <ChevronRight className="h-5 w-5 ml-2" />
