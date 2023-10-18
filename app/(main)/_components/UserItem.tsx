@@ -13,10 +13,10 @@ import { LogOut } from "lucide-react"
 export default function UserItem() {
   const { user } = useUser()
   return (
-    <div className="py-3">
+    <div className="py-3 px-1">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant={"ghost"} className="gap-2">
+          <Button variant={"ghost"} className="gap-2 px-3">
             <Avatar className="w-6 h-6">
               <AvatarImage src={user?.imageUrl} />
             </Avatar>
