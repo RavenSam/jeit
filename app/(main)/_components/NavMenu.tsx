@@ -41,7 +41,6 @@ export default function NavMenu({
   }
 
   return (
-    <div className="flex items-center gap-x-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -77,7 +76,6 @@ export default function NavMenu({
           </DropdownMenuLabel>
         </DropdownMenuContent>
       </DropdownMenu>
-    </div>
   )
 }
 

@@ -9,6 +9,7 @@ import { useParams } from "next/navigation"
 import Title from "./Title"
 import ArchivedBanner from "./ArchivedBanner"
 import NavMenu from "./NavMenu"
+import Publish from "./Publish"
 
 interface NavbarProps {
   isCollapsed: boolean
@@ -55,7 +56,10 @@ export default function Navbar({ isCollapsed, onResetWidth }: NavbarProps) {
         <div className="flex items-center justify-between w-full">
           <Title initialData={doc} />
 
-          <NavMenu documentId={doc._id} />
+          <div className="flex items-center gap-x-2">
+            <Publish doc={doc} />
+            <NavMenu documentId={doc._id} />
+          </div>
         </div>
       </nav>
 

@@ -108,8 +108,9 @@ export default function Item({
       {!!id && (
         <div
           role="button"
+          title={expanded ? "Minify" : "Expand"}
           onClick={handleExpand}
-          className="h-full rounded-sm text-foreground/50 hover:text-foreground py-1 px-2"
+          className="h-full rounded-sm text-foreground/50 hover:text-foreground p-1 pr-2"
         >
           <ChevronRight
             className={cn(
@@ -126,7 +127,7 @@ export default function Item({
         <div className="p-1">
           <Icon
             className={cn(
-              "shrink-0 h-[18px] mr-2 text-muted-foreground group-hover:text-foreground",
+              "shrink-0 h-[18px] w-[18px] mr-2 text-muted-foreground group-hover:text-foreground",
               active && "text-foreground"
             )}
           />
@@ -147,6 +148,7 @@ export default function Item({
             <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
               <div
                 role="button"
+                title="More"
                 className="h-full p-1 rounded-sm text-foreground/50 hover:text-foreground opacity-0 group-hover:opacity-100"
               >
                 <MoreHorizontal className="h-4 w-4 shrink-0" />
@@ -180,6 +182,7 @@ export default function Item({
           <div
             role="button"
             onClick={onCreate}
+            title="Create document within"
             className="h-full p-1 rounded-sm text-foreground/50 hover:text-foreground opacity-0 group-hover:opacity-100"
           >
             <Plus className="h-4 w-4 shrink-0" />
