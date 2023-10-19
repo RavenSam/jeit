@@ -39,7 +39,7 @@ export default function Navbar({ isCollapsed, onResetWidth }: NavbarProps) {
 
   return (
     <>
-      <nav className="bg-secondary px-3 py-2 w-full flex items-center gap-x-4">
+      <nav className="bg-secondary px-3 py-1 w-full flex items-center gap-x-4">
         {isCollapsed && (
           <Button
             onClick={onResetWidth}

@@ -1,12 +1,13 @@
 "use client"
 
 import Cover from "@/components/cover"
-import Editor from "@/components/editor"
 import Toolbar from "@/components/toolbar"
 import { Skeleton } from "@/components/ui/skeleton"
 import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
-import { useQuery } from "convex/react"
+import { useMutation, useQuery } from "convex/react"
+import dynamic from "next/dynamic"
+import { useMemo } from "react"
 
 interface DocumentPageProps {
   params: {
@@ -15,25 +16,35 @@ interface DocumentPageProps {
 }
 
 export default function DocumentPage({ params }: DocumentPageProps) {
+  const Editor = useMemo(
+    () => dynamic(() => import("@/components/editor"), { ssr: false }),
+    []
+  )
+
   const doc = useQuery(api.documents.getById, { documentId: params.documentId })
+  const update = useMutation(api.documents.update)
+
+  const onChange = (content: string) => {
+    update({ id: params.documentId, content })
+  }
 
   if (doc === undefined) {
     return (
-      <div className="pb-40  mt-14">
+      <div className="pb-40  mt-12">
         <Cover.Skeleton />
         <div className="md:max-w-3xl lg:max-w-4xl mx-auto mt-10">
           <Skeleton className="h-14 w-1/2" />
           <div className="space-y-2 pt-8">
-          <Skeleton className="h-4 w-[88%]" />
-          <Skeleton className="h-4 w-[88%]" />
-          <Skeleton className="h-4 w-[70%]" />
-          <Skeleton className="h-4 w-[70%]" />
+            <Skeleton className="h-4 w-[88%]" />
+            <Skeleton className="h-4 w-[88%]" />
+            <Skeleton className="h-4 w-[70%]" />
+            <Skeleton className="h-4 w-[70%]" />
           </div>
           <div className="space-y-3 pt-5">
-          <Skeleton className="h-4 w-[80%]" />
-          <Skeleton className="h-4 w-[85%]" />
-          <Skeleton className="h-4 w-[81%]" />
-          <Skeleton className="h-4 w-[88%]" />
+            <Skeleton className="h-4 w-[80%]" />
+            <Skeleton className="h-4 w-[85%]" />
+            <Skeleton className="h-4 w-[81%]" />
+            <Skeleton className="h-4 w-[88%]" />
           </div>
         </div>
       </div>
@@ -45,13 +56,13 @@ export default function DocumentPage({ params }: DocumentPageProps) {
   }
 
   return (
-    <div className="pb-40  mt-14">
+    <div className="pb-40 mt-12">
       <Cover url={doc.coverImage} />
 
-      <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
+      <div className="md:max-w-3xl lg:max-w-4xl px-4 mx-auto space-y-8">
         <Toolbar initialData={doc} />
 
-        <Editor onChange={()=>{}} initialContent={doc.content} />
+        <Editor onChange={onChange} initialContent={doc.content} />
       </div>
     </div>
   )

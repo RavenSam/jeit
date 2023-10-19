@@ -5,14 +5,18 @@ import { api } from "@/convex/_generated/api"
 import { useUser } from "@clerk/clerk-react"
 import { useMutation } from "convex/react"
 import { FolderOpenDot, Plus } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 export default function DocumentsPage() {
   const { user } = useUser()
   const create = useMutation(api.documents.create)
+  const router = useRouter()
 
   const onCreate = () => {
-    const promise = create({ title: "Untitled" })
+    const promise = create({ title: "Untitled" }).then((documentId) =>
+      router.push(`/documents/${documentId}`)
+    )
 
     toast.promise(promise, {
       loading: "Creating a new note...",
@@ -23,22 +27,22 @@ export default function DocumentsPage() {
 
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-8">
-      <FolderOpenDot className="h-52 w-52 opacity-20" />
+      <FolderOpenDot className="h-64 w-64 opacity-20" />
 
-      <h2 className="text-lg font-medium">
-        Howdy {user?.username}, to your Jet docs
-      </h2>
+      <div className="flex flex-col items-center justify-center space-y-1">
+        <h2 className="text-lg font-semibold">
+          Howdy {user?.username}, to your Jet docs
+        </h2>
 
-      <div className="flex flex-col items-center justify-center space-y-4">
         <p className="text-muted-foreground font-light">
           Seems like your docs is empty. Change that?
         </p>
-
-        <Button onClick={onCreate}>
-          <Plus className="h-5 w-5 mr-2" />
-          Create a note
-        </Button>
       </div>
+
+      <Button size={"lg"} onClick={onCreate}>
+        <Plus className="h-6 w-6 mr-2" />
+        Create a note
+      </Button>
     </div>
   )
 }

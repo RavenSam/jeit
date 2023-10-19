@@ -91,6 +91,8 @@ export default function Item({
       success: "Note archived",
       error: "Oops! Failed to archive note. Try again.",
     })
+
+    router.push(`/documents`)
   }
   return (
     <div
