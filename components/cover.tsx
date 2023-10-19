@@ -11,6 +11,7 @@ import { api } from "@/convex/_generated/api"
 import { useParams } from "next/navigation"
 import { Id } from "@/convex/_generated/dataModel"
 import { useEdgeStore } from "@/lib/edgestore"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface CoverProps {
   url?: string
@@ -34,7 +35,7 @@ export default function Cover({ url, preview }: CoverProps) {
   return (
     <div
       className={cn(
-        "relative w-full h-[45vh] group mt-14",
+        "relative w-full h-[45vh] group",
         !url && "h-[12vh]",
         url && "bg-muted"
       )}
@@ -65,4 +66,8 @@ export default function Cover({ url, preview }: CoverProps) {
       )}
     </div>
   )
+}
+
+Cover.Skeleton = function CoverSkeleton() {
+  return <Skeleton className="h-[25vh] w-full rounded-md" />
 }

@@ -66,7 +66,7 @@ export default function Toolbar({ initialData, preview }: ToolbarProps) {
   }
 
   return (
-    <div className="pl-[54px] group relative">
+    <div className="group relative">
       {!!initialData.icon && !preview && (
         <div className="flex items-start gap-x-1 group/icon pt-6">
           <IconPicker onChange={onIconSelect}>

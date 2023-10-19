@@ -27,13 +27,13 @@ export default function TrashItem({ isMobile }: { isMobile: boolean }) {
         align="start"
         className="p-0 w-72"
       >
-        <TrashBox isMobile={isMobile} />
+        <TrashBox />
       </PopoverContent>
     </Popover>
   )
 }
 
-function TrashBox({ isMobile }: { isMobile: boolean }) {
+function TrashBox() {
   const router = useRouter()
   const params = useParams()
   const archivedDocs = useQuery(api.documents.getTrash)
