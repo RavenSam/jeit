@@ -1,6 +1,7 @@
 "use client"
 
 import Cover from "@/components/cover"
+import Editor from "@/components/editor"
 import Toolbar from "@/components/toolbar"
 import { Skeleton } from "@/components/ui/skeleton"
 import { api } from "@/convex/_generated/api"
@@ -49,6 +50,8 @@ export default function DocumentPage({ params }: DocumentPageProps) {
 
       <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
         <Toolbar initialData={doc} />
+
+        <Editor onChange={()=>{}} initialContent={doc.content} />
       </div>
     </div>
   )
