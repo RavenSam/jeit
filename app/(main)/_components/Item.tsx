@@ -96,6 +96,7 @@ export default function Item({
     <div
       role="button"
       onClick={onClick}
+      title={label}
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
       className={cn(
         "group min-h-[27px] text-sm py-1.5 pr-1 w-full rounded-lg hover:bg-foreground/5 hover:text-foreground flex items-center text-muted-foreground font-medium",

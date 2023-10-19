@@ -14,6 +14,7 @@ import { Id } from "@/convex/_generated/dataModel"
 import Spinner from "@/components/spinner"
 import { Input } from "@/components/ui/input"
 import { ConfirmModal } from "@/components/modals/confirm-modal"
+import { useEdgeStore } from "@/lib/edgestore"
 
 export default function TrashItem({ isMobile }: { isMobile: boolean }) {
   return (
@@ -38,6 +39,7 @@ function TrashBox({ isMobile }: { isMobile: boolean }) {
   const archivedDocs = useQuery(api.documents.getTrash)
   const restore = useMutation(api.documents.restore)
   const remove = useMutation(api.documents.remove)
+  const { edgestore } = useEdgeStore()
 
   const [search, setSearch] = useState("")
 
@@ -64,8 +66,13 @@ function TrashBox({ isMobile }: { isMobile: boolean }) {
     })
   }
 
-  const onRemove = (documentId: Id<"documents">) => {
-    const promise = remove({ id: documentId })
+  const onRemove = (documentId: Id<"documents">, ImageUrl?: string) => {
+    const deleteDoc = remove({ id: documentId })
+
+
+    const deleteImage = ImageUrl && edgestore.publicFiles.delete({ url: ImageUrl })
+
+    const promise = Promise.all([deleteDoc, deleteImage])
 
     toast.promise(promise, {
       loading: "Deleting note...",
@@ -121,7 +128,7 @@ function TrashBox({ isMobile }: { isMobile: boolean }) {
               >
                 <Undo2 className="h-4 w-4 shrink-0" />
               </div>
-              <ConfirmModal onConfirm={() => onRemove(doc._id)}>
+              <ConfirmModal onConfirm={() => onRemove(doc._id, doc.coverImage)}>
                 <div
                   role="button"
                   title="Delete permanently"

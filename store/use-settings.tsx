@@ -1,13 +1,13 @@
 import { create } from "zustand"
 
-interface settingsState {
+interface SettingsState {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
   toggle: () => void
 }
 
-export const useSettings = create<settingsState>()((set, get) => ({
+export const useSettings = create<SettingsState>()((set, get) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),

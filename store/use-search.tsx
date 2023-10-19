@@ -1,13 +1,13 @@
 import { create } from "zustand"
 
-interface searchState {
+interface SearchState {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
   toggle: () => void
 }
 
-export const useSearch = create<searchState>()((set, get) => ({
+export const useSearch = create<SearchState>()((set, get) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),

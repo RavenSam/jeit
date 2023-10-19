@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal, Trash } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export default function NavMenu({
   documentId,
@@ -78,4 +79,9 @@ export default function NavMenu({
       </DropdownMenu>
     </div>
   )
+}
+
+
+NavMenu.Skeleton = function NavMenuSkeleton() {
+  return <Skeleton className="h-10 w-10 rounded-md" />
 }

@@ -23,8 +23,12 @@ export default function Navbar({ isCollapsed, onResetWidth }: NavbarProps) {
 
   if (doc === undefined) {
     return (
-      <div className="bg-background px-3 py-2 w-full flex items-center">
+      <div className="bg-secondary px-3 py-2 w-full flex items-center justify-between">
         <Title.Skeleton />
+
+        <div className="flex items-center gap-x-2">
+          <NavMenu.Skeleton />
+        </div>
       </div>
     )
   }
@@ -51,13 +55,11 @@ export default function Navbar({ isCollapsed, onResetWidth }: NavbarProps) {
         <div className="flex items-center justify-between w-full">
           <Title initialData={doc} />
 
-          <NavMenu documentId={doc._id}/>
+          <NavMenu documentId={doc._id} />
         </div>
       </nav>
 
-      {doc.isArchived && (
-        <ArchivedBanner documentId={doc._id} />
-      )}
+      {doc.isArchived && <ArchivedBanner documentId={doc._id} />}
     </>
   )
 }

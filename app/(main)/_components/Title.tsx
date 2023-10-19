@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { api } from "@/convex/_generated/api"
 import { Doc } from "@/convex/_generated/dataModel"
 import { useMutation } from "convex/react"
@@ -16,11 +16,15 @@ export default function Title({ initialData }: TitleProps) {
   const update = useMutation(api.documents.update)
 
   const [title, setTitle] = useState(initialData?.title || "Untitled")
-  const [isEditting, setisEditting] = useState(false)
+  const [isEditing, setisEditing] = useState(false)
+
+  useEffect(() => {
+    setTitle(initialData.title)
+  }, [initialData.title])
 
   const enableInput = () => {
     setTitle(initialData.title)
-    setisEditting(true)
+    setisEditing(true)
     setTimeout(() => {
       inputRef.current?.focus()
       inputRef.current?.setSelectionRange(0, inputRef.current.value.length)
@@ -28,7 +32,7 @@ export default function Title({ initialData }: TitleProps) {
   }
 
   const disableInput = () => {
-    setisEditting(false)
+    setisEditing(false)
 
     if (title !== initialData.title) {
       update({ id: initialData._id, title: title || "Untitled" })
@@ -49,7 +53,7 @@ export default function Title({ initialData }: TitleProps) {
     <div className="flex items-center gap-x-1">
       {!!initialData.icon && <span>{initialData.icon}</span>}
 
-      {isEditting ? (
+      {isEditing ? (
         <Input
           ref={inputRef}
           onChange={onChange}
