@@ -15,7 +15,7 @@ interface DocumentPageProps {
   }
 }
 
-export default function DocumentPage({ params }: DocumentPageProps) {
+export default function PiblicDocumentPage({ params }: DocumentPageProps) {
   const Editor = useMemo(
     () => dynamic(() => import("@/components/editor"), { ssr: false }),
     []
@@ -57,12 +57,12 @@ export default function DocumentPage({ params }: DocumentPageProps) {
 
   return (
     <div className="pb-40">
-      <Cover url={doc.coverImage} />
+      <Cover url={doc.coverImage} preview/>
 
       <div className="md:max-w-3xl lg:max-w-4xl px-4 mx-auto space-y-8">
-        <Toolbar initialData={doc} />
+        <Toolbar initialData={doc} preview/>
 
-        <Editor onChange={onChange} initialContent={doc.content} />
+        <Editor onChange={onChange} initialContent={doc.content} editable={false}/>
       </div>
     </div>
   )

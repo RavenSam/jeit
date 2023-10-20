@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useUser } from "@clerk/clerk-react"
+import useDocs from "@/hooks/use-docs"
 
 interface ItemProps {
   id?: Id<"documents">
@@ -49,8 +50,8 @@ export default function Item({
 }: ItemProps) {
   const { user } = useUser()
   const router = useRouter()
-  const create = useMutation(api.documents.create)
   const archive = useMutation(api.documents.archive)
+  const { createDoc } = useDocs()
 
   const handleExpand = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
@@ -62,20 +63,10 @@ export default function Item({
 
     if (!id) return
 
-    const promise = create({ title: "Untitled", parentDocument: id }).then(
-      (documentId) => {
-        if (!expanded) {
-          onExpand?.()
-        }
-
-        router.push(`/documents/${documentId}`)
+    createDoc(id).then((docId) => {
+      if (!expanded) {
+        onExpand?.()
       }
-    )
-
-    toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Oops! Failed to created a the note. Try again.",
     })
   }
 

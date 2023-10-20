@@ -8,35 +8,31 @@ import {
   Search,
   Settings,
 } from "lucide-react"
-import { useParams, usePathname, useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 import React, { ElementRef, useEffect, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import UserItem from "./UserItem"
 import Item from "./Item"
-import { useMutation } from "convex/react"
-import { api } from "@/convex/_generated/api"
-import { toast } from "sonner"
 import DocumentList from "./DocumentList"
 import TrashItem from "./TrashItem"
 import { useSearch } from "@/store/use-search"
 import { useSettings } from "@/store/use-settings"
 import Navbar from "./Navbar"
+import useDocs from "@/hooks/use-docs"
 
 export default function Navigation() {
   const pathname = usePathname()
   const params = useParams()
-  const router = useRouter()
   const isMobile = useMediaQuery("(max-width: 768px)")
   const { onOpen: openSearch } = useSearch()
   const { onOpen: openSettings } = useSettings()
-
-  const create = useMutation(api.documents.create)
 
   const isResizingRef = useRef(false)
   const sidebarRef = useRef<ElementRef<"aside">>(null)
   const navbarRef = useRef<ElementRef<"div">>(null)
   const [isResetting, setIsResetting] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(isMobile)
+  const { createDoc } = useDocs()
 
   useEffect(() => {
     if (isMobile) {
@@ -112,17 +108,7 @@ export default function Navigation() {
     }
   }
 
-  const onCreate = () => {
-    const promise = create({ title: "Untitled" }).then((docId) =>
-      router.push(`/documents/${docId}`)
-    )
-
-    toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Oops! Failed to created a the note. Try again.",
-    })
-  }
+  const onCreate = () => createDoc()
 
   return (
     <>

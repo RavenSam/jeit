@@ -132,7 +132,7 @@ export default function Toolbar({ initialData, preview }: ToolbarProps) {
           role="button"
           tabIndex={0}
           onClick={enableInput}
-          className="text-5xl break-words font-bold p-0 focus-visible:ring"
+          className="text-5xl break-words font-bold p-0 focus-visible:ring cursor-text"
         >
           {title}
         </div>

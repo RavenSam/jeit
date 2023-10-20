@@ -97,7 +97,7 @@ export default function Publish({ doc }: PublishProps) {
         <div
           className={cn(
             "grid grid-rows-[0fr] transition-all duration-300",
-            isPublished && "grid-rows-[1fr]"
+            isPublished && !isSubmitting && "grid-rows-[1fr]"
           )}
         >
           <div
