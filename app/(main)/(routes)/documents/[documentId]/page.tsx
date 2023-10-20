@@ -17,7 +17,7 @@ interface DocumentPageProps {
 
 export default function DocumentPage({ params }: DocumentPageProps) {
   const Editor = useMemo(
-    () => dynamic(() => import("@/components/editor"), { ssr: false }),
+    () => dynamic(() => import("@/components/editor"), { ssr: false, loading: LodingEditor }),
     []
   )
 
@@ -34,18 +34,7 @@ export default function DocumentPage({ params }: DocumentPageProps) {
         <Cover.Skeleton />
         <div className="md:max-w-3xl lg:max-w-4xl mx-auto mt-10">
           <Skeleton className="h-14 w-1/2" />
-          <div className="space-y-2 pt-8">
-            <Skeleton className="h-4 w-[88%]" />
-            <Skeleton className="h-4 w-[88%]" />
-            <Skeleton className="h-4 w-[70%]" />
-            <Skeleton className="h-4 w-[70%]" />
-          </div>
-          <div className="space-y-3 pt-5">
-            <Skeleton className="h-4 w-[80%]" />
-            <Skeleton className="h-4 w-[85%]" />
-            <Skeleton className="h-4 w-[81%]" />
-            <Skeleton className="h-4 w-[88%]" />
-          </div>
+          <LodingEditor/>
         </div>
       </div>
     )
@@ -62,8 +51,24 @@ export default function DocumentPage({ params }: DocumentPageProps) {
       <div className="md:max-w-3xl lg:max-w-4xl px-4 mx-auto space-y-8">
         <Toolbar initialData={doc} />
 
+    
+
         <Editor onChange={onChange} initialContent={doc.content} />
       </div>
     </div>
   )
 }
+
+
+const LodingEditor = () => (<><div className="space-y-2 pt-8">
+<Skeleton className="h-4 w-[88%]" />
+<Skeleton className="h-4 w-[88%]" />
+<Skeleton className="h-4 w-[70%]" />
+<Skeleton className="h-4 w-[70%]" />
+</div>
+<div className="space-y-3 pt-5">
+<Skeleton className="h-4 w-[80%]" />
+<Skeleton className="h-4 w-[85%]" />
+<Skeleton className="h-4 w-[81%]" />
+<Skeleton className="h-4 w-[88%]" />
+</div></>)

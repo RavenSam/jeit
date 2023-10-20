@@ -70,9 +70,15 @@ export const getSidebar = query({
       .order("desc")
       .collect()
 
-    return documents
+    const lightDocs = documents.map(doc =>{
+      const { content, ...rest } = doc
+      return rest
+    })
+
+    return lightDocs
   },
 })
+
 
 export const create = mutation({
   args: {

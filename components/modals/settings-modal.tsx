@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/dialog"
 import { useSettings } from "@/store/use-settings"
 import { useTheme } from "next-themes"
+import { Laptop, Moon, Sun } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export function SettingsDialog() {
   const { isOpen, onClose } = useSettings()
@@ -32,7 +34,11 @@ export function SettingsDialog() {
 export function ModeRadio() {
   const { theme, setTheme } = useTheme()
 
-  const modeList = ["light", "dark", "system"]
+  const modeList = [
+    { label: "light", icon: Moon },
+    { label: "dark", icon: Sun },
+    { label: "system", icon: Laptop },
+  ]
 
   return (
     <div className="">
@@ -44,12 +50,18 @@ export function ModeRadio() {
       >
         {modeList.map((mode) => (
           <label
-            htmlFor={mode}
-            key={mode}
-            className="border rounded-lg shadow w-1/3 p-4 flex items-center gap-x-4 capitalize"
+            htmlFor={mode.label}
+            key={mode.label}
+            className="border rounded-lg shadow w-1/3 p-4 cursor-pointer"
           >
-            <RadioGroupItem value={mode} id={mode} />
-            {mode}
+            <div className="flex items-start capitalize">
+              <RadioGroupItem value={mode.label} id={mode.label} />
+
+              <div className="flex items-center flex-col gap-y-4 flex-1 -ml-2">
+                <span className="-mt-1 font-medium">{mode.label}</span>
+                <mode.icon className={cn("h-10 w-10 opacity-20", theme == mode.label && "opacity-100")} />
+              </div>
+            </div>
           </label>
         ))}
       </RadioGroup>
