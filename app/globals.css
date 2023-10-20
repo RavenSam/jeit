@@ -85,3 +85,7 @@ body,
   background-color: var(--foreground);
   padding: 0;
 }
+
+.mantine-Menu-dropdown {
+  max-height: 200px;
+}

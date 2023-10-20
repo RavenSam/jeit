@@ -92,16 +92,16 @@ export default function Toolbar({ initialData, preview }: ToolbarProps) {
         <span className="text-6xl pt-6">{initialData.icon}</span>
       )}
 
-      <div className="opacity-0 translate-y-2 group-hover:translate-y-0 transition group-hover:opacity-100 flex items-center gap-x-1 py-4">
+      <div className="md:opacity-0 md:translate-y-2 group-hover:translate-y-0 transition group-hover:opacity-100 flex items-center gap-x-1 py-4">
         {!initialData.icon && !preview && (
           <IconPicker asChild onChange={onIconSelect}>
             <Button
               variant={"ghost"}
               size={"sm"}
-              className="text-muted-foreground text-xs"
+              className="text-muted-foreground/50 md:text-muted-foreground text-xs"
             >
               <Smile className="h-5 w-5 mr-2" />
-              Add icon
+              <span className="hidden md:inline">Add icon</span>
             </Button>
           </IconPicker>
         )}
@@ -110,10 +110,10 @@ export default function Toolbar({ initialData, preview }: ToolbarProps) {
             onClick={onOpen}
             variant={"ghost"}
             size={"sm"}
-            className="text-muted-foreground text-xs"
+            className="text-muted-foreground/50 md:text-muted-foreground text-xs"
           >
             <ImageIcon className="h-5 w-5 mr-2" />
-            Add cover
+            <span className="hidden md:inline">Add cover</span>
           </Button>
         )}
       </div>

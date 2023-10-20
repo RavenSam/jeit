@@ -43,24 +43,24 @@ export default function Cover({ url, preview }: CoverProps) {
       {!!url && <Image src={url} fill alt="Cover" className="object-cover" />}
 
       {url && !preview && (
-        <div className="opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition absolute bottom-5 right-5 flex items-center gap-x-2">
+        <div className="md:opacity-0 md:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition absolute bottom-5 right-5 flex items-center gap-x-2">
           <Button
             onClick={() => onReplace(url)}
             variant={"outline"}
             size={"sm"}
-            className="text-white drop-shadow-lg border-white backdrop-blur-sm bg-white/20 text-xs hover:bg-white/60 hover:text-gray-800"
+            className="text-white drop-shadow-lg border-white backdrop-blur-sm bg-white/20 text-xs hover:bg-white/60 hover:text-black"
           >
-            <ImageIcon className="h-5 w-5 mr-2" />
-            Change cover
+            <ImageIcon className="h-5 w-5 md:mr-2" />
+            <span className="hidden md:inline">Change cover</span>
           </Button>
           <Button
             onClick={onRemoveCover}
             variant={"outline"}
             size={"sm"}
-            className="text-white drop-shadow-lg border-white backdrop-blur-sm bg-white/20 text-xs hover:bg-white/60 hover:text-gray-800"
+            className="text-white drop-shadow-lg border-white backdrop-blur-sm bg-white/20 text-xs hover:bg-white/60 hover:text-black"
           >
-            <X className="h-5 w-5 mr-2" />
-            Remove cover
+            <X className="h-5 w-5 md:mr-2" />
+            <span className="hidden md:inline">Remove cover</span>
           </Button>
         </div>
       )}
