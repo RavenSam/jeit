@@ -6,6 +6,7 @@ import { redirect } from "next/navigation"
 import Spinner from "@/components/spinner"
 import Navigation from "./_components/Navigation"
 import SearchCommand from "@/components/search-command"
+import NextNProgressClient from "@/components/next-progress"
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   const { isAuthenticated, isLoading } = useConvexAuth()

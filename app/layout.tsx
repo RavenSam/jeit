@@ -9,6 +9,7 @@ import { EdgeStoreProvider } from "@/lib/edgestore"
 
 import "./globals.css"
 import ModalProvider from "@/components/providers/modal-provider"
+import NextNProgressClient from "@/components/next-progress"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -48,7 +49,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
               <Toaster position="bottom-center" />
 
+              <NextNProgressClient />
+
               <ModalProvider />
+              
             </ThemeProvider>
           </EdgeStoreProvider>
         </ConvexClientProvider>
