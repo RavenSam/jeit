@@ -102,7 +102,7 @@ export function EditorWidth() {
             htmlFor={mode.label}
             key={mode.label}
             className={cn(
-              "border rounded-lg shadow w-1/3 p-4 cursor-pointer",
+              "border rounded-lg shadow w-1/4 p-4 cursor-pointer",
               editorWidth == mode.value
                 ? "border-primary"
                 : "hover:bg-primary/10"

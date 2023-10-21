@@ -1,12 +1,13 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core"
 import { BlockNoteView, useBlockNote } from "@blocknote/react"
 import { useTheme } from "next-themes"
 import { useEdgeStore } from "@/lib/edgestore"
 
 import "@blocknote/core/style.css"
+import TextInfo from "@/app/(main)/_components/TextInfo"
 
 interface EditorProps {
   onChange: (value: string) => void
@@ -21,6 +22,7 @@ export default function Editor({
 }: EditorProps) {
   const { resolvedTheme } = useTheme()
   const { edgestore } = useEdgeStore()
+  const [bareText, setBareText] = useState<string | null>("")
 
   const handleUpload = async (file: File) => {
     const res = await edgestore.publicFiles.upload({ file })
@@ -35,6 +37,11 @@ export default function Editor({
       : undefined,
     onEditorContentChange: (editor) => {
       onChange(JSON.stringify(editor.topLevelBlocks, null, 2))
+      setBareText(editor.prosemirrorView.dom.innerText)
+    },
+
+    onEditorReady: (editor) => {
+      setBareText(editor.prosemirrorView.dom.innerText)
     },
 
     uploadFile: handleUpload,
@@ -42,6 +49,8 @@ export default function Editor({
 
   return (
     <div>
+      <TextInfo bareText={bareText} />
+
       <BlockNoteView
         editor={editor}
         theme={resolvedTheme === "dark" ? "dark" : "light"}

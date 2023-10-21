@@ -18,9 +18,12 @@ export const useSettings = create<SettingsState>()((set, get) => ({
   onClose: () => set({ isOpen: false }),
   toggle: () => set({ isOpen: !get().isOpen }),
 
-  editorWidth: Number(localStorage.getItem(LOCAL_SETTINGS_KEY)) || 896,
+  editorWidth:
+    typeof localStorage !== "undefined"
+      ? Number(localStorage?.getItem(LOCAL_SETTINGS_KEY) || 896)
+      : 896,
   setEditorWidth: (width: number) => {
-    localStorage.setItem(LOCAL_SETTINGS_KEY, width.toString())
+    localStorage?.setItem(LOCAL_SETTINGS_KEY, width.toString())
 
     set({ editorWidth: width })
   },
