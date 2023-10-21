@@ -74,7 +74,7 @@ const LodingEditor = () => (
       <Skeleton className="h-4 w-[70%]" />
       <Skeleton className="h-4 w-[70%]" />
     </div>
-    <div className="space-y-3 pt-5">
+    <div className="space-y-3 pt-2">
       <Skeleton className="h-4 w-[80%]" />
       <Skeleton className="h-4 w-[85%]" />
       <Skeleton className="h-4 w-[81%]" />
