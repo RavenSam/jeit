@@ -5,9 +5,10 @@ import { BlockNoteEditor, PartialBlock } from "@blocknote/core"
 import { BlockNoteView, useBlockNote } from "@blocknote/react"
 import { useTheme } from "next-themes"
 import { useEdgeStore } from "@/lib/edgestore"
+import Typography from "@tiptap/extension-typography"
+import TextInfo from "@/app/(main)/_components/TextInfo"
 
 import "@blocknote/core/style.css"
-import TextInfo from "@/app/(main)/_components/TextInfo"
 
 interface EditorProps {
   onChange: (value: string) => void
