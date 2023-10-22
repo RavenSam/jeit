@@ -40,7 +40,7 @@ export default function NotesDrawer({ documentId }: NotesDrawerProps) {
       </SheetTrigger>
       <SheetContent
         overlay={false}
-        className="w-[500px] sm:w-[540px] pt-2.5 overflow-auto"
+        className="!max-w-lg pt-2.5 overflow-auto"
       >
         <SheetHeader>
           <SheetTitle>Notes</SheetTitle>

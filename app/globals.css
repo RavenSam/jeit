@@ -91,7 +91,7 @@ body,
 }
 
 .tiptap p.is-editor-empty:first-child::before {
-  color: var(--accent-foreground);
+  color: var(--muted-foreground);
   content: attr(data-placeholder);
   float: left;
   height: 0;
