@@ -130,7 +130,7 @@ function SingleNote({ note }: { note: Doc<"stickynotes"> }) {
           </div>
         )}
 
-        <div className="absolute bottom-1 right-1 flex items-center shrink-0">
+        <div className="absolute bottom-1 right-2 flex items-center shrink-0">
           <DropdownMenu>
             <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
               <div
