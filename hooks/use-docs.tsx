@@ -6,6 +6,8 @@ import { toast } from "sonner"
 
 export default function useDocs() {
   const create = useMutation(api.documents.create)
+  const archive = useMutation(api.documents.archive)
+
   const router = useRouter()
 
   /**
@@ -31,5 +33,17 @@ export default function useDocs() {
     return promise
   }
 
-  return { createDoc }
+  const archiveDoc = (id: Id<"documents">) => {
+    const promise = archive({ id })
+
+    toast.promise(promise, {
+      loading: "Moving to trash...",
+      success: "Note archived",
+      error: "Oops! Failed to archive note. Try again.",
+    })
+
+    router.push(`/documents`)
+  }
+
+  return { createDoc, archiveDoc }
 }
