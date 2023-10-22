@@ -11,7 +11,14 @@ export default defineSchema({
     coverImage: v.optional(v.string()),
     icon: v.optional(v.string()),
     isPublished: v.boolean(),
+    stickyNotes: v.optional(v.array(v.id("stickynotes"))),
   })
     .index("by_user", ["userId"])
     .index("by_user_parent", ["userId", "parentDocument"]),
+
+  stickynotes: defineTable({
+    content: v.optional(v.string()),
+    parentDocument: v.id("documents"),
+    isSticky: v.boolean(),
+  }).index("by_docs", ["parentDocument"]),
 })

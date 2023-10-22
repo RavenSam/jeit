@@ -49,9 +49,7 @@ export default function Item({
   onExpand,
 }: ItemProps) {
   const { user } = useUser()
-  const router = useRouter()
-  const archive = useMutation(api.documents.archive)
-  const { createDoc } = useDocs()
+  const { createDoc, archiveDoc } = useDocs()
 
   const handleExpand = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
@@ -75,16 +73,9 @@ export default function Item({
 
     if (!id) return
 
-    const promise = archive({ id })
-
-    toast.promise(promise, {
-      loading: "Moving to trash...",
-      success: "Note archived",
-      error: "Oops! Failed to archive note. Try again.",
-    })
-
-    router.push(`/documents`)
+    archiveDoc(id)
   }
+
   return (
     <div
       role="button"

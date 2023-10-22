@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
-import { MoreHorizontal, Trash } from "lucide-react"
+import { MoreVertical, Trash } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export default function NavMenu({
@@ -48,7 +48,7 @@ export default function NavMenu({
             size="icon"
             className="hover:bg-transparent text-muted-foreground hover:text-foreground"
           >
-            <MoreHorizontal className="h-5 w-5" />
+            <MoreVertical className="h-5 w-5" />
             <span className="sr-only">Menu</span>
           </Button>
         </DropdownMenuTrigger>
