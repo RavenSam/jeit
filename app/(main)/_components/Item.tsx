@@ -1,8 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
-import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
 import { cn } from "@/lib/utils"
-import { useMutation } from "convex/react"
 import {
   ChevronRight,
   LucideIcon,
@@ -10,8 +8,6 @@ import {
   Plus,
   Trash,
 } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
 import {
   DropdownMenu,
   DropdownMenuContent,
