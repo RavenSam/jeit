@@ -25,9 +25,9 @@ export default function useDocs() {
     )
 
     toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Oops! Failed to created a the note. Try again.",
+      loading: "Creating a new doc...",
+      success: "New doc created!",
+      error: "Oops! Failed to created a the doc. Try again.",
     })
 
     return promise
@@ -38,8 +38,8 @@ export default function useDocs() {
 
     toast.promise(promise, {
       loading: "Moving to trash...",
-      success: "Note archived",
-      error: "Oops! Failed to archive note. Try again.",
+      success: "Doc archived",
+      error: "Oops! Failed to archive doc. Try again.",
     })
 
     router.push(`/documents`)

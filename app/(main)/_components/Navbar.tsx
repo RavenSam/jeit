@@ -10,6 +10,7 @@ import Title from "./Title"
 import ArchivedBanner from "./ArchivedBanner"
 import NavMenu from "./NavMenu"
 import Publish from "./Publish"
+import NotesDrawer from "./NotesDrawer"
 
 interface NavbarProps {
   isCollapsed: boolean
@@ -58,6 +59,9 @@ export default function Navbar({ isCollapsed, onResetWidth }: NavbarProps) {
 
           <div className="flex items-center gap-x-2">
             <Publish doc={doc} />
+
+            <NotesDrawer documentId={doc._id} />
+
             <NavMenu documentId={doc._id} />
           </div>
         </div>
