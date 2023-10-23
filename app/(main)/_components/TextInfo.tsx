@@ -26,13 +26,19 @@ function textCount(text = "") {
   return countList
 }
 
+function kFormatter(num:number) {
+  return num > 999 ? num % 1000 === 0 ? (num/1000).toFixed(0) + 'k' : (num/1000).toFixed(1) + 'k' : num
+}
+
 export default function TextInfo({ bareText }: TextInfoProps) {
   if (bareText == null) return
 
   const counts = textCount(bareText)
 
+
+
   return (
-    <div className="fixed bottom-5 right-2 md:right-5">
+    <div className="fixed bottom-5 z-10 right-2 md:right-5">
       <Popover>
         <PopoverTrigger className="" asChild>
           <Button
@@ -41,7 +47,7 @@ export default function TextInfo({ bareText }: TextInfoProps) {
             size={"sm"}
             className="font-semibold text-xs opacity-50 hover:opacity-100"
           >
-            {counts.words}
+            {kFormatter(counts.words)}
           </Button>
         </PopoverTrigger>
         <PopoverContent align="end" className="w-52" forceMount>

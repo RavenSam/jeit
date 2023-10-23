@@ -26,5 +26,5 @@ export default function LightEditor({ onChange, initialContent }: EditorProps) {
     },
   })
 
-  return <EditorContent editor={editor} />
+  return <EditorContent editor={editor} className="prose dark:prose-invert w-full" />
 }
