@@ -61,10 +61,12 @@ export default function Publish({ doc }: PublishProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="hover:bg-transparent text-muted-foreground hover:text-foreground"
+          className="hover:bg-transparent relative text-muted-foreground hover:text-foreground"
         >
           <FolderUp className="h-5 w-5" />
           <span className="sr-only">Publish</span>
+
+          {isPublished && <span className="absolute w-3 h-3 rounded-full top-1 right-1 bg-emerald-500 shadow shadow-emerald-500"></span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-72" forceMount>
