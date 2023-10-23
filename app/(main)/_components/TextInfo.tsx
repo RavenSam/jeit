@@ -30,6 +30,10 @@ function kFormatter(num:number) {
   return num > 999 ? num % 1000 === 0 ? (num/1000).toFixed(0) + 'k' : (num/1000).toFixed(1) + 'k' : num
 }
 
+function numberFormat(num:number) {
+  return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(num).split(",").join(" ")
+}
+
 export default function TextInfo({ bareText }: TextInfoProps) {
   if (bareText == null) return
 
@@ -55,7 +59,7 @@ export default function TextInfo({ bareText }: TextInfoProps) {
             {Object.keys(counts).map((key) => (
               <React.Fragment key={key}>
                 <span className="font-semibold text-right">
-                  {counts[key as keyof typeof counts]}
+                  {numberFormat(counts[key as keyof typeof counts])}
                 </span>
                 <span className="font-medium capitalize">{key}</span>
               </React.Fragment>
