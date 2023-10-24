@@ -108,6 +108,24 @@ export default function Navigation() {
     }
   }
 
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "b" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        
+        if(isCollapsed){
+          resetWidth()
+        }else {
+          collapse()
+        }
+      }
+    }
+
+    document.addEventListener("keydown", down)
+
+    return () => document.removeEventListener("keydown", down)
+  }, [resetWidth, isCollapsed])
+
   const onCreate = () => createDoc()
 
   return (
