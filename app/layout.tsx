@@ -14,49 +14,48 @@ import NextNProgressClient from "@/components/next-progress"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Jet",
-  description: "Lightning fast peersonal editor",
-  icons: {
-    icon: [
-      {
-        media: "(prefers-color-scheme: light)",
-        url: "/logo.svg",
-        href: "/logo.svg",
-      },
-      {
-        media: "(prefers-color-scheme: dark)",
-        url: "/logo-dark.svg",
-        href: "/logo-dark.svg",
-      },
-    ],
-  },
+   title: "Jeit",
+   description: "Lightning fast personal editor",
+   icons: {
+      icon: [
+         {
+            media: "(prefers-color-scheme: light)",
+            url: "/logo.svg",
+            href: "/logo.svg",
+         },
+         {
+            media: "(prefers-color-scheme: dark)",
+            url: "/logo-dark.svg",
+            href: "/logo-dark.svg",
+         },
+      ],
+   },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ConvexClientProvider>
-          <EdgeStoreProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-              storageKey="jet-theme"
-            >
-              {children}
+   return (
+      <html lang="en" suppressHydrationWarning>
+         <body className={inter.className}>
+            <ConvexClientProvider>
+               <EdgeStoreProvider>
+                  <ThemeProvider
+                     attribute="class"
+                     defaultTheme="system"
+                     enableSystem
+                     disableTransitionOnChange
+                     storageKey="jet-theme"
+                  >
+                     {children}
 
-              <Toaster position="bottom-center" />
+                     <Toaster position="bottom-center" />
 
-              <NextNProgressClient />
+                     <NextNProgressClient />
 
-              <ModalProvider />
-              
-            </ThemeProvider>
-          </EdgeStoreProvider>
-        </ConvexClientProvider>
-      </body>
-    </html>
-  )
+                     <ModalProvider />
+                  </ThemeProvider>
+               </EdgeStoreProvider>
+            </ConvexClientProvider>
+         </body>
+      </html>
+   )
 }
