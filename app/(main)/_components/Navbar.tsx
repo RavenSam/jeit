@@ -41,7 +41,7 @@ export default function Navbar({ isCollapsed, onResetWidth }: NavbarProps) {
 
    return (
       <>
-         <nav className="bg-secondary/50 backdrop-blur-sm  backdrop px-3 py-1 w-full flex items-center gap-x-4">
+         <nav className="bg-secondary/50 backdrop-blur-sm  shadow backdrop px-3 py-1 w-full flex items-center gap-x-4">
             {isCollapsed && (
                <Button
                   onClick={onResetWidth}
