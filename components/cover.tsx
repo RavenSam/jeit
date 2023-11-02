@@ -33,11 +33,11 @@ export default function Cover({ url, preview }: CoverProps) {
     }
 
     return (
-        <div className={cn("relative w-full h-[60vh] group", !url && "h-[12vh]", url && "bg-muted")}>
+        <div className={cn("relative w-full h-[40] md:h-[60vh] group", !url && "h-[12vh]", url && "bg-muted")}>
             {!!url && <Image src={url} fill alt="Cover" className="object-cover" />}
 
             {url && !preview && (
-                <div className="md:opacity-0 md:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition absolute bottom-5 right-5 flex items-center gap-x-2">
+                <div className="md:opacity-0 md:translate-y-2 group-hover:opacity- group-hover:translate-y-0 transition absolute bottom-5 right-5 flex items-center gap-x-2">
                     <Button
                         onClick={() => onReplace(url)}
                         variant={"outline"}
