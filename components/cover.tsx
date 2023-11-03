@@ -33,7 +33,7 @@ export default function Cover({ url, preview }: CoverProps) {
     }
 
     return (
-        <div className={cn("relative w-full h-[40] md:h-[60vh] group", !url && "h-[12vh]", url && "bg-muted")}>
+        <div className={cn("relative w-full h-[40] md:h-[60vh] group", !url && "!h-[12vh]", url && "bg-muted")}>
             {!!url && <Image src={url} fill alt="Cover" className="object-cover" />}
 
             {url && !preview && (
