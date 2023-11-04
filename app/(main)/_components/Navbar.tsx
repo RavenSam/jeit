@@ -11,6 +11,7 @@ import ArchivedBanner from "./ArchivedBanner"
 import NavMenu from "./NavMenu"
 import Publish from "./Publish"
 import NotesDrawer from "./NotesDrawer"
+import { cn } from "@/lib/utils"
 
 interface NavbarProps {
     isCollapsed: boolean
