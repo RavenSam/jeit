@@ -103,6 +103,6 @@ body,
   outline: none;
 }
 
-.tiptap.ProseMirror  > div:first-child div{
+.tiptap.ProseMirror  > div:first-child > div{
   margin: 1rem 0;
 }
