@@ -11,51 +11,42 @@ import TextInfo from "@/app/(main)/_components/TextInfo"
 import "@blocknote/core/style.css"
 
 interface EditorProps {
-  onChange: (value: string) => void
-  initialContent?: string
-  editable?: boolean
+    onChange: (value: string) => void
+    initialContent?: string
+    editable?: boolean
 }
 
-export default function Editor({
-  onChange,
-  initialContent,
-  editable,
-}: EditorProps) {
-  const { resolvedTheme } = useTheme()
-  const { edgestore } = useEdgeStore()
-  const [bareText, setBareText] = useState<string | null>("")
+export default function Editor({ onChange, initialContent, editable }: EditorProps) {
+    const { resolvedTheme } = useTheme()
+    const { edgestore } = useEdgeStore()
+    const [bareText, setBareText] = useState<string | null>("")
 
-  const handleUpload = async (file: File) => {
-    const res = await edgestore.publicFiles.upload({ file })
+    const handleUpload = async (file: File) => {
+        const res = await edgestore.publicFiles.upload({ file })
 
-    return res.url
-  }
+        return res.url
+    }
 
-  const editor: BlockNoteEditor = useBlockNote({
-    editable,
-    initialContent: initialContent
-      ? (JSON.parse(initialContent) as PartialBlock[])
-      : undefined,
-    onEditorContentChange: (editor) => {
-      onChange(JSON.stringify(editor.topLevelBlocks, null, 2))
-      setBareText(editor.prosemirrorView.dom.innerText)
-    },
+    const editor: BlockNoteEditor = useBlockNote({
+        editable,
+        initialContent: initialContent ? (JSON.parse(initialContent) as PartialBlock[]) : undefined,
+        onEditorContentChange: (editor) => {
+            onChange(JSON.stringify(editor.topLevelBlocks, null, 2))
+            setBareText(editor.prosemirrorView.dom.innerText)
+        },
 
-    onEditorReady: (editor) => {
-      setBareText(editor.prosemirrorView.dom.innerText)
-    },
+        onEditorReady: (editor) => {
+            setBareText(editor.prosemirrorView.dom.innerText)
+        },
 
-    uploadFile: handleUpload,
-  })
+        uploadFile: handleUpload,
+    })
 
-  return (
-    <div>
-      <TextInfo bareText={bareText} />
+    return (
+        <div>
+            <TextInfo bareText={bareText} />
 
-      <BlockNoteView
-        editor={editor}
-        theme={resolvedTheme === "dark" ? "dark" : "light"}
-      />
-    </div>
-  )
+            <BlockNoteView editor={editor} theme={resolvedTheme === "dark" ? "dark" : "light"} />
+        </div>
+    )
 }
